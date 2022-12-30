@@ -64,7 +64,7 @@ namespace WishListTests
             var contextAccessor = new Mock<IHttpContextAccessor>();
             var claimsFactory = new Mock<IUserClaimsPrincipalFactory<ApplicationUser>>();
             var userManager = new UserManager<ApplicationUser>(userStore.Object, null, null, null, null, null, null, null, null);
-            var signInManager = new SignInManager<ApplicationUser>(userManager, contextAccessor.Object, claimsFactory.Object, null, null, null);
+            var signInManager = new SignInManager<ApplicationUser>(userManager, contextAccessor.Object, claimsFactory.Object, null, null, null, null);
             var controller = Activator.CreateInstance(accountController, new object[] { userManager, signInManager });
             Assert.True(accountController.GetField("_userManager", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(controller) == userManager, "`AccountController`'s constructor did not set the `_userManager` field based on the provided `UserManager` parameter.");
             Assert.True(accountController.GetField("_signInManager", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(controller) == signInManager, "`AccountController``s constructor did not set the `_signInManager` field based on the provided `SignInManager` parameter.");
